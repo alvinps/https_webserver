@@ -38,8 +38,8 @@ while True:
             file = open(filename[1:])
             outputdata = file.read()
             print("Response sent: OK 200")
-            connectionSocket.send(bytes("HTTP/1.1 200 OK\n","UTF-8"))
-            print("File ( %s ) is being sent..." % (filename))
+            connectionSocket.send(bytes("HTTP/1.1 200 OK","UTF-8"))
+            print("File ( %s ) is being sent..." % (filename.decode("UTF-8")))
             for i in range(0, len(outputdata)):
                 connectionSocket.send(bytes(outputdata[i],"UTF-8"))
     except IOError:
