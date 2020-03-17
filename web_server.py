@@ -4,12 +4,13 @@
 
 from socket import *
 import sys
-import thread
+import _thread
 # socket and sys in modules imported
-Max_Connection_Allowed = 10
-
+Max_Connection_Allowed = 10 # allowed for queuing in the network.
+# this is a function that received requuests and sends data to the web_client.
 def new_connection(connectionSocket, addr):
     # print out details about the connection here.
+    print("\n\n***************************************************************")
     print("Connection Accepted by:\n")
     print("Client Host: %s" % gethostbyaddr(connectionSocket.getpeername()[0])[0])
     print("IP address: %s\nPort: %d" % connectionSocket.getpeername() )
@@ -44,6 +45,7 @@ def new_connection(connectionSocket, addr):
     connectionSocket.close()
     # closing the connection
     print("Closing connection... ")
+    print("\nReady to serve...\n")
 
 # server socket initiated
 serverSocket = socket(AF_INET, SOCK_STREAM)
@@ -57,13 +59,12 @@ serverSocket.bind(('',Port_num))
 serverSocket.listen(Max_Connection_Allowed)
 print("Connection ready on port %d...\n" % Port_num)
 print("*** A Simple Web Server ***")
-
+print("Ready to serve...\n")
 while True:
     #Establish the connection
-    print("\n\n***************************************************************")
-    print("Ready to serve...\n")
     connectionSocket, addr = serverSocket.accept() # new connection accepted
-    thread.start_new_thread(new_connection,(connectionSocket,addr))
+    # thread generated per connection to a client.
+    _thread.start_new_thread(new_connection,(connectionSocket,addr))
 
 # closing the server
 serverSocket.close()
