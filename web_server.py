@@ -15,7 +15,7 @@ print("*** A Simple Web Server ***")
 
 while True:
     #Establish the connection
-    print("***************************************************************")
+    print("\n\n***************************************************************")
     print("Ready to serve...\n")
     connectionSocket, addr = serverSocket.accept()
     # print out details about the connection here.
