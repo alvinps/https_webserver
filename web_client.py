@@ -6,7 +6,13 @@ import sys
 clientSocket = socket(AF_INET, SOCK_STREAM)
 Port_num = 8080
 filename = "index.htm"
-ip_address = ''
+ip_address = str(sys.argv[1])
+param_count  = len(sys.argv)
+if param_count == 4:
+    filename = str(sys.argv[3])
+    Port_num = int(sys.argv[2])
+
+elif param_count ==3:
 
 
 
