@@ -4,28 +4,11 @@
 
 from socket import *
 import sys
+import thread
 # socket and sys in modules imported
 Max_Connection_Allowed = 10
 
-# server socket initiated
-serverSocket = socket(AF_INET, SOCK_STREAM)
-Port_num = 8080 # deafult port  number to be used
-# if provided in the commandline that specific port number is used
-if (len(sys.argv) >= 2):
-    Port_num = int(sys.argv[1]) #
-
-serverSocket.bind(('',Port_num))
-# listening for a connection from a client
-serverSocket.listen(Max_Connection_Allowed)
-print("Connection ready on port %d...\n" % Port_num)
-print("*** A Simple Web Server ***")
-
-while True:
-    #Establish the connection
-    print("\n\n***************************************************************")
-    print("Ready to serve...\n")
-    connectionSocket, addr = serverSocket.accept() # new connection accepted
-
+def new_connection(connectionSocket, addr):
     # print out details about the connection here.
     print("Connection Accepted by:\n")
     print("Client Host: %s" % gethostbyaddr(connectionSocket.getpeername()[0])[0])
@@ -61,6 +44,26 @@ while True:
     connectionSocket.close()
     # closing the connection
     print("Closing connection... ")
+
+# server socket initiated
+serverSocket = socket(AF_INET, SOCK_STREAM)
+Port_num = 8080 # deafult port  number to be used
+# if provided in the commandline that specific port number is used
+if (len(sys.argv) >= 2):
+    Port_num = int(sys.argv[1]) #
+
+serverSocket.bind(('',Port_num))
+# listening for a connection from a client
+serverSocket.listen(Max_Connection_Allowed)
+print("Connection ready on port %d...\n" % Port_num)
+print("*** A Simple Web Server ***")
+
+while True:
+    #Establish the connection
+    print("\n\n***************************************************************")
+    print("Ready to serve...\n")
+    connectionSocket, addr = serverSocket.accept() # new connection accepted
+    thread.start_new_thread(new_connection,(connectionSocket,addr))
 
 # closing the server
 serverSocket.close()

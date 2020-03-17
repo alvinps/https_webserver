@@ -40,3 +40,7 @@ In order to execute the client, type
 
 please note the port number and file name is optional. If not provided a default
 port number of 8080 will be used and default of index.htm will be used.
+
+Resources Used:
+-> Socket Programming https://docs.python.org/3/howto/sockets.html
+->
