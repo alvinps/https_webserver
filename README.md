@@ -1,7 +1,15 @@
 # https_webserver
 A multi threaded web server using HTTP protocol
+# WEB SERVER
+# Alvin Poudel Sharma
+# UTA ID: 1001555230
 
 Written in:    Python 3
+Code Editor Used : Atom
+
+The following codes can be executed using any python interpreter through command
+line or command prompt.
+
 
 Description:
 This is a simple multi threaded web server that uses HTTP protocol to handle a
